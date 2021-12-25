@@ -1,3 +1,4 @@
+import 'package:componentes/theme/app_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:componentes/routers/app_routes.dart';
 
@@ -12,13 +13,15 @@ class HomeScreen extends StatelessWidget {
         title: const Center(
           child: Text('Componentes en Flutter'),
         ),
-        elevation: 0,
       ),
       body: ListView.separated(
         itemBuilder: (context, index) {
           final option = menuOptions[index];
           return ListTile(
-            leading: Icon(option.icon),
+            leading: Icon(
+              option.icon,
+              color: AppTheme.primary,
+            ),
             title: Text(option.name),
             onTap: () {
               Navigator.pushNamed(context, option.route);
