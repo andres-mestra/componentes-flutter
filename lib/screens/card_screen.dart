@@ -11,6 +11,22 @@ class CardScreen extends StatelessWidget {
 
   const CardScreen({Key? key}) : super(key: key);
 
+  List<Widget> listCardType2() {
+    return images
+        .map(
+          (image) => Column(
+            children: [
+              CustomCardType2(
+                type: image.type,
+                title: image.title,
+              ),
+              const SizedBox(height: 10),
+            ],
+          ),
+        )
+        .toList();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,19 +41,7 @@ class CardScreen extends StatelessWidget {
         children: [
           const CustomCardType1(),
           const SizedBox(height: 10),
-          ...images
-              .map(
-                (image) => Column(
-                  children: [
-                    CustomCardType2(
-                      type: image.type,
-                      title: image.title,
-                    ),
-                    const SizedBox(height: 10),
-                  ],
-                ),
-              )
-              .toList()
+          ...listCardType2()
         ],
       ),
     );
