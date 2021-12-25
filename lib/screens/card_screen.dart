@@ -6,7 +6,7 @@ class CardScreen extends StatelessWidget {
   static final List<ImageCard> images = [
     ImageCard(type: 'people-walking', title: 'Live'),
     ImageCard(type: 'beach', title: 'Paradise'),
-    ImageCard(type: 'city', title: 'The Best City'),
+    ImageCard(type: 'city'),
   ];
 
   const CardScreen({Key? key}) : super(key: key);

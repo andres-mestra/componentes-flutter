@@ -3,8 +3,8 @@ import 'package:componentes/theme/app_theme.dart';
 
 class CustomCardType2 extends StatelessWidget {
   final String type;
-  final String title;
-  const CustomCardType2({Key? key, required this.type, required this.title})
+  final String? title;
+  const CustomCardType2({Key? key, required this.type, this.title})
       : super(key: key);
 
   @override
@@ -26,11 +26,12 @@ class CustomCardType2 extends StatelessWidget {
             fit: BoxFit.cover,
             fadeInDuration: const Duration(milliseconds: 300),
           ),
-          Container(
-            alignment: AlignmentDirectional.centerEnd,
-            padding: const EdgeInsets.only(right: 20, top: 10, bottom: 10),
-            child: Text(title),
-          )
+          if (title != null)
+            Container(
+              alignment: AlignmentDirectional.centerEnd,
+              padding: const EdgeInsets.only(right: 20, top: 10, bottom: 10),
+              child: Text(title!),
+            )
         ],
       ),
     );
