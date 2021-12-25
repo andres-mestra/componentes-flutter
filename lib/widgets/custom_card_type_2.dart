@@ -1,22 +1,36 @@
 import 'package:flutter/material.dart';
+import 'package:componentes/theme/app_theme.dart';
 
 class CustomCardType2 extends StatelessWidget {
-  const CustomCardType2({Key? key}) : super(key: key);
+  final String type;
+  final String title;
+  const CustomCardType2({Key? key, required this.type, required this.title})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Card(
-      elevation: 10,
+      clipBehavior: Clip.antiAlias,
+      elevation: 30,
+      shadowColor: AppTheme.primary.withOpacity(0.5),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(18),
+      ),
       child: Column(
-        children: const [
+        children: [
           FadeInImage(
-            image: NetworkImage('https://source.unsplash.com/1600x900/?beach`'),
-            placeholder: AssetImage('assets/jar-loading.gif'),
+            image: NetworkImage('https://source.unsplash.com/1600x900/?$type`'),
+            placeholder: const AssetImage('assets/jar-loading.gif'),
             width: double.infinity,
             height: 170,
             fit: BoxFit.cover,
-            fadeInDuration: Duration(milliseconds: 300),
+            fadeInDuration: const Duration(milliseconds: 300),
           ),
+          Container(
+            alignment: AlignmentDirectional.centerEnd,
+            padding: const EdgeInsets.only(right: 20, top: 10, bottom: 10),
+            child: Text(title),
+          )
         ],
       ),
     );
