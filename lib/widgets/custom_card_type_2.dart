@@ -8,11 +8,14 @@ class CustomCardType2 extends StatelessWidget {
     return Card(
       elevation: 10,
       child: Column(
-        children: [
+        children: const [
           FadeInImage(
-            image: const NetworkImage(
-                'https://source.unsplash.com/1600x900/?beach`'),
-            placeholder: const AssetImage('assets/jar-loading.gif'),
+            image: NetworkImage('https://source.unsplash.com/1600x900/?beach`'),
+            placeholder: AssetImage('assets/jar-loading.gif'),
+            width: double.infinity,
+            height: 170,
+            fit: BoxFit.cover,
+            fadeInDuration: Duration(milliseconds: 300),
           ),
         ],
       ),
