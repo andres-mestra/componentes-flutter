@@ -10,6 +10,7 @@ class SliderScreen extends StatefulWidget {
 
 class _SliderScreenState extends State<SliderScreen> {
   double _sliderValue = 100;
+  bool _sliderEnabled = true;
 
   @override
   Widget build(BuildContext context) {
@@ -25,11 +26,43 @@ class _SliderScreenState extends State<SliderScreen> {
               max: 400,
               activeColor: AppTheme.primary,
               value: _sliderValue,
-              onChanged: (value) {
-                _sliderValue = value;
-                setState(() {});
-              },
+              onChanged: _sliderEnabled
+                  ? (value) {
+                      _sliderValue = value;
+                      setState(() {});
+                    }
+                  : null,
             ),
+            // Checkbox(
+            //   value: _sliderEnabled,
+            //   onChanged: (value) {
+            //     _sliderEnabled = value ?? true;
+            //     setState(() {});
+            //   },
+            // ),
+            // Switch(
+            //   value: _sliderEnabled,
+            //   onChanged: (value) => setState(() {
+            //     _sliderEnabled = value;
+            //   }),
+            // ),
+            CheckboxListTile(
+              activeColor: AppTheme.primary,
+              title: const Text('Habilitar Slider'),
+              value: _sliderEnabled,
+              onChanged: (value) => setState(() {
+                _sliderEnabled = value ?? true;
+              }),
+            ),
+            SwitchListTile.adaptive(
+              activeColor: AppTheme.primary,
+              title: const Text('Habilitar Slider'),
+              value: _sliderEnabled,
+              onChanged: (value) => setState(() {
+                _sliderEnabled = value;
+              }),
+            ),
+            const AboutListTile(),
             //SingleChildScrollView: cuando el contenido se sale de la pantalla
             //habilita el scroll
             Expanded(
