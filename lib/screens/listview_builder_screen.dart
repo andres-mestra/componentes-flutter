@@ -38,6 +38,15 @@ class _ListViewBuilderScreenState extends State<ListViewBuilderScreen> {
 
     isLoading = false;
     setState(() {});
+
+    if ((scrollController.position.pixels + 100) >=
+        scrollController.position.maxScrollExtent) return;
+
+    scrollController.animateTo(
+      scrollController.position.pixels + 120,
+      duration: const Duration(milliseconds: 300),
+      curve: Curves.fastOutSlowIn,
+    );
   }
 
   void add5() {
@@ -48,6 +57,7 @@ class _ListViewBuilderScreenState extends State<ListViewBuilderScreen> {
 
   @override
   Widget build(BuildContext context) {
+    //Obtengo la información de las dimensiones de la pantalla
     final size = MediaQuery.of(context).size;
 
     return Scaffold(
@@ -74,11 +84,12 @@ class _ListViewBuilderScreenState extends State<ListViewBuilderScreen> {
                 );
               },
             ),
-            Positioned(
-              bottom: 40,
-              left: size.width * 0.5 - 30,
-              child: const _LoadingIcon(),
-            )
+            if (isLoading)
+              Positioned(
+                bottom: 40,
+                left: size.width * 0.5 - 30,
+                child: const _LoadingIcon(),
+              )
           ],
         ),
       ),
@@ -98,7 +109,7 @@ class _LoadingIcon extends StatelessWidget {
       height: 60,
       width: 60,
       decoration: BoxDecoration(
-        color: Colors.black.withOpacity(0.9),
+        color: Colors.black.withOpacity(0.8),
         shape: BoxShape.circle,
       ),
       child: const CircularProgressIndicator(
