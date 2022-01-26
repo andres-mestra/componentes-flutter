@@ -55,6 +55,14 @@ class _ListViewBuilderScreenState extends State<ListViewBuilderScreen> {
     setState(() {});
   }
 
+  Future<void> onRefresh() async {
+    await Future.delayed(const Duration(seconds: 2));
+    final lastId = imagesIds.last;
+    imagesIds.clear();
+    imagesIds.add(lastId + 1);
+    add5();
+  }
+
   @override
   Widget build(BuildContext context) {
     //Obtengo la información de las dimensiones de la pantalla
@@ -68,21 +76,27 @@ class _ListViewBuilderScreenState extends State<ListViewBuilderScreen> {
         removeBottom: true,
         child: Stack(
           children: [
-            ListView.builder(
-              physics: const BouncingScrollPhysics(), //efecto fin lista de ios
-              controller: scrollController,
-              itemCount: imagesIds.length,
-              itemBuilder: (context, index) {
-                //https://source.unsplash.com/random/300×300
-                return FadeInImage(
-                  width: double.infinity, //tome todo el ancho posible
-                  height: 300, // el height que va tener la imagen
-                  fit: BoxFit.cover, // Toma todo el espacio que tiene la imagen
-                  placeholder: const AssetImage('assets/jar-loading.gif'),
-                  image: NetworkImage(
-                      'https://source.unsplash.com/500x300/?${imagesIds[index]}a'),
-                );
-              },
+            RefreshIndicator(
+              color: AppTheme.primary,
+              onRefresh: onRefresh,
+              child: ListView.builder(
+                physics:
+                    const BouncingScrollPhysics(), //efecto fin lista de ios
+                controller: scrollController,
+                itemCount: imagesIds.length,
+                itemBuilder: (context, index) {
+                  //https://source.unsplash.com/random/300×300
+                  return FadeInImage(
+                    width: double.infinity, //tome todo el ancho posible
+                    height: 300, // el height que va tener la imagen
+                    fit: BoxFit
+                        .cover, // Toma todo el espacio que tiene la imagen
+                    placeholder: const AssetImage('assets/jar-loading.gif'),
+                    image: NetworkImage(
+                        'https://source.unsplash.com/500x300/?${imagesIds[index]}a'),
+                  );
+                },
+              ),
             ),
             if (isLoading)
               Positioned(
